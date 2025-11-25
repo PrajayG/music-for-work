@@ -1,0 +1,179 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+// ============================================
+// Repository Page Styles
+// ============================================
+
+.repository {
+  @include container;
+  padding-top: $space-8;
+  padding-bottom: $space-8;
+  
+  &__header {
+    margin-bottom: $space-8;
+  }
+  
+  &__title {
+    font-size: $font-size-4xl;
+    font-family: $font-family-mono;
+    font-weight: $font-weight-bold;
+    color: $color-text-primary;
+    margin-bottom: $space-2;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+  }
+  
+  &__description {
+    font-size: $font-size-base;
+    color: $color-text-muted;
+    max-width: 700px;
+  }
+}
+
+.repository-view {
+  &__controls {
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: rgba($color-surface, 0.8);
+    backdrop-filter: blur(8px);
+    padding: $space-4;
+    border: $border-width-medium solid $color-border;
+    margin-bottom: $space-6;
+    position: sticky;
+    top: $space-4;
+    z-index: $z-index-sticky;
+    
+    @include respond-to('md') {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+  
+  &__search-wrapper {
+    position: relative;
+    width: 100%;
+    
+    @include respond-to('md') {
+      width: 300px;
+    }
+  }
+  
+  &__search-icon {
+    position: absolute;
+    left: $space-2;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $color-text-muted;
+    pointer-events: none;
+  }
+  
+  &__view-buttons {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    width: 100%;
+    
+    @include respond-to('md') {
+      width: auto;
+    }
+  }
+  
+  &__filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-2;
+    align-items: center;
+    margin-bottom: $space-4;
+  }
+  
+  &__filter-label {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    display: flex;
+    align-items: center;
+    gap: $space-1;
+  }
+  
+  &__content {
+    min-height: 500px;
+  }
+  
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: $space-6;
+    
+    @include respond-to('md') {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @include respond-to('lg') {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+  
+  &__empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: $space-20 0;
+    color: $color-text-muted;
+  }
+}
+
+.link-card {
+  @extend .card;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  
+  &--interactive {
+    @extend .card--interactive;
+  }
+  
+  &__platform-badge {
+    flex-shrink: 0;
+  }
+  
+  &__genres {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $space-2;
+  }
+  
+  &__link {
+    font-size: $font-size-sm;
+    font-family: $font-family-mono;
+    color: $color-primary;
+    display: flex;
+    align-items: center;
+    gap: $space-1;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: color $transition-fast;
+    
+    &:hover {
+      color: $color-primary-hover;
+    }
+  }
+}
+
+.mindmap {
+  width: 100%;
+  height: 100%;
+  min-height: 500px;
+  border: $border-width-medium solid $color-border;
+  overflow: hidden;
+  background-color: $color-background;
+  
+  &__loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: $color-text-muted;
+  }
+}

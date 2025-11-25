@@ -1,0 +1,73 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+// ============================================
+// Card Component (BEM)
+// ============================================
+
+.card {
+  @include nier-box($color-border);
+  
+  display: flex;
+  flex-direction: column;
+  background-color: $color-surface;
+  transition: border-color $transition-fast, transform $transition-fast;
+  
+  &:hover {
+    border-color: $color-primary;
+  }
+  
+  &__header {
+    padding: $space-6;
+    border-bottom: $border-width-thin solid $color-border;
+  }
+  
+  &__title {
+    font-size: $font-size-xl;
+    font-family: $font-family-mono;
+    font-weight: $font-weight-bold;
+    color: $color-text-primary;
+    margin-bottom: $space-2;
+  }
+  
+  &__description {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    line-height: $line-height-normal;
+  }
+  
+  &__content {
+    padding: $space-6;
+    flex: 1;
+  }
+  
+  &__footer {
+    padding: $space-6;
+    border-top: $border-width-thin solid $color-border;
+    display: flex;
+    align-items: center;
+    gap: $space-3;
+  }
+  
+  // Variants
+  &--hoverable {
+    cursor: pointer;
+    
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: $shadow-md;
+    }
+  }
+  
+  &--interactive {
+    cursor: pointer;
+    
+    &:hover {
+      border-color: $color-primary;
+      
+      .card__title {
+        color: $color-primary;
+      }
+    }
+  }
+}

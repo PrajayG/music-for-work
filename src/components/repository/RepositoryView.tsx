@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { LayoutGrid, Network, Search, Filter } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 interface RepositoryViewProps {
   initialLinks: MusicLink[];
@@ -36,96 +35,94 @@ export function RepositoryView({ initialLinks }: RepositoryViewProps) {
   });
 
   return (
-    <div className="space-y-6">
+    <div className="repository-view">
       {/* Controls Header */}
-      <div className="flex flex-col md:flex-row gap-4 justify-between items-start md:items-center bg-card/30 p-4 rounded-lg border border-ocean-light backdrop-blur-md sticky top-4 z-10">
-        <div className="flex items-center gap-2 w-full md:w-auto">
-          <div className="relative w-full md:w-64">
-            <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-            <Input
-              placeholder="Search music..."
-              className="pl-8 bg-ocean-deep/50 border-ocean-light"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-          </div>
+      <div className="repository-view__controls">
+        <div className="repository-view__search-wrapper">
+          <Search className="repository-view__search-icon" style={{ height: '16px', width: '16px' }} />
+          <Input
+            placeholder="Search music..."
+            style={{ paddingLeft: '36px' }}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
         </div>
 
-        <div className="flex items-center gap-2 w-full md:w-auto overflow-x-auto pb-2 md:pb-0">
+        <div className="repository-view__view-buttons">
           <Button
             variant={viewMode === "grid" ? "default" : "outline"}
             size="sm"
             onClick={() => setViewMode("grid")}
-            className="gap-2"
           >
-            <LayoutGrid className="h-4 w-4" /> Grid
+            <LayoutGrid style={{ height: '16px', width: '16px' }} /> Grid
           </Button>
           <Button
             variant={viewMode === "mindmap" ? "default" : "outline"}
             size="sm"
             onClick={() => setViewMode("mindmap")}
-            className="gap-2"
           >
-            <Network className="h-4 w-4" /> Mind Map
+            <Network style={{ height: '16px', width: '16px' }} /> Mind Map
           </Button>
         </div>
       </div>
 
       {/* Filters */}
-      <div className="space-y-4">
-        <div className="flex flex-wrap gap-2 items-center">
-          <span className="text-sm text-muted-foreground flex items-center gap-1"><Filter className="h-3 w-3"/> Platform:</span>
+      <div className="repository-view__filters">
+        <span className="repository-view__filter-label">
+          <Filter style={{ height: '12px', width: '12px' }} /> Platform:
+        </span>
+        <Badge
+          variant={selectedPlatform === null ? "default" : "outline"}
+          clickable
+          onClick={() => setSelectedPlatform(null)}
+        >
+          All
+        </Badge>
+        {allPlatforms.map((platform) => (
           <Badge
-            variant={selectedPlatform === null ? "default" : "outline"}
-            className="cursor-pointer hover:bg-primary/20"
-            onClick={() => setSelectedPlatform(null)}
+            key={platform}
+            variant={selectedPlatform === platform ? "default" : "outline"}
+            clickable
+            onClick={() => setSelectedPlatform(platform === selectedPlatform ? null : platform)}
           >
-            All
+            {platform}
           </Badge>
-          {allPlatforms.map((platform) => (
-            <Badge
-              key={platform}
-              variant={selectedPlatform === platform ? "default" : "outline"}
-              className="cursor-pointer hover:bg-primary/20"
-              onClick={() => setSelectedPlatform(platform === selectedPlatform ? null : platform)}
-            >
-              {platform}
-            </Badge>
-          ))}
-        </div>
+        ))}
+      </div>
         
-        <div className="flex flex-wrap gap-2 items-center">
-          <span className="text-sm text-muted-foreground flex items-center gap-1"><Filter className="h-3 w-3"/> Genre:</span>
+      <div className="repository-view__filters">
+        <span className="repository-view__filter-label">
+          <Filter style={{ height: '12px', width: '12px' }} /> Genre:
+        </span>
+        <Badge
+          variant={selectedGenre === null ? "default" : "outline"}
+          clickable
+          onClick={() => setSelectedGenre(null)}
+        >
+          All
+        </Badge>
+        {allGenres.map((genre) => (
           <Badge
-            variant={selectedGenre === null ? "default" : "outline"}
-            className="cursor-pointer hover:bg-primary/20"
-            onClick={() => setSelectedGenre(null)}
+            key={genre}
+            variant={selectedGenre === genre ? "default" : "outline"}
+            clickable
+            onClick={() => setSelectedGenre(genre === selectedGenre ? null : genre)}
           >
-            All
+            {genre}
           </Badge>
-          {allGenres.map((genre) => (
-            <Badge
-              key={genre}
-              variant={selectedGenre === genre ? "default" : "outline"}
-              className="cursor-pointer hover:bg-primary/20"
-              onClick={() => setSelectedGenre(genre === selectedGenre ? null : genre)}
-            >
-              {genre}
-            </Badge>
-          ))}
-        </div>
+        ))}
       </div>
 
       {/* Content Area */}
-      <div className="min-h-[500px]">
+      <div className="repository-view__content">
         {viewMode === "grid" ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="repository-view__grid">
             {filteredLinks.length > 0 ? (
               filteredLinks.map((link) => (
                 <LinkCard key={link.slug} link={link} />
               ))
             ) : (
-              <div className="col-span-full text-center py-20 text-muted-foreground">
+              <div className="repository-view__empty">
                 No music found matching your filters.
               </div>
             )}

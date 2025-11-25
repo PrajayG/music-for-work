@@ -8,7 +8,7 @@ import { MusicLink } from "@/lib/content";
 
 const ForceGraph2D = dynamic(() => import("react-force-graph-2d"), {
   ssr: false,
-  loading: () => <div className="flex items-center justify-center h-full text-ocean-mist">Loading Mind Map...</div>,
+  loading: () => <div className="mindmap__loading">Loading Mind Map...</div>,
 });
 
 interface MindMapProps {
@@ -66,7 +66,7 @@ export function MindMap({ links }: MindMapProps) {
   }, [links]);
 
   return (
-    <div ref={containerRef} className="w-full h-full min-h-[500px] border border-ocean-light rounded-lg overflow-hidden bg-ocean-deep">
+    <div ref={containerRef} className="mindmap">
       <ForceGraph2D
         width={dimensions.width}
         height={dimensions.height}

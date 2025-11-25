@@ -26,35 +26,35 @@ export default async function InterviewPage({ params }: PageProps) {
   }
 
   return (
-    <main className="container mx-auto px-4 py-8 max-w-3xl">
+    <main className="interview-detail">
       <Link href="/interviews">
-        <Button variant="ghost" className="mb-6 pl-0 hover:pl-2 transition-all text-ocean-mist hover:text-primary">
-          <ArrowLeft className="mr-2 h-4 w-4" /> Back to Interviews
+        <Button variant="ghost" className="interview-detail__back-button">
+          <ArrowLeft style={{ marginRight: '8px', height: '16px', width: '16px' }} /> Back to Interviews
         </Button>
       </Link>
 
-      <article className="space-y-8">
-        <header className="space-y-4 border-b border-ocean-light pb-8">
-          <div className="flex items-center gap-2">
-            <Badge variant="outline" className="text-primary border-primary/30">Interview</Badge>
-            <span className="text-sm text-muted-foreground flex items-center gap-1">
-              <Calendar className="h-3 w-3" /> {interview.date}
+      <article className="interview-detail__article">
+        <header className="interview-detail__header">
+          <div className="interview-detail__badges">
+            <Badge variant="outline">Interview</Badge>
+            <span className="interview-detail__date">
+              <Calendar style={{ height: '12px', width: '12px' }} /> {interview.date}
             </span>
           </div>
           
-          <h1 className="text-4xl md:text-5xl font-mono font-bold text-ocean-foam leading-tight">
+          <h1 className="interview-detail__title">
             {interview.title}
           </h1>
           
-          <div className="flex items-center gap-3 text-lg text-ocean-mist">
-            <User className="h-5 w-5" />
-            <span className="font-semibold text-ocean-foam">{interview.interviewee}</span>
-            <span className="text-muted-foreground">•</span>
+          <div className="interview-detail__interviewee-info">
+            <User style={{ height: '20px', width: '20px' }} />
+            <span className="interview-detail__interviewee-name">{interview.interviewee}</span>
+            <span>•</span>
             <span>{interview.role}</span>
           </div>
         </header>
 
-        <div className="prose prose-invert prose-lg max-w-none prose-headings:font-mono prose-headings:text-ocean-foam prose-p:text-ocean-mist prose-a:text-primary hover:prose-a:text-primary/80">
+        <div className="interview-detail__content">
           <MarkdownRenderer content={interview.content} />
         </div>
       </article>

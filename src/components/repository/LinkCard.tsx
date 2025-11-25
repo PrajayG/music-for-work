@@ -10,22 +10,22 @@ interface LinkCardProps {
 
 export function LinkCard({ link }: LinkCardProps) {
   return (
-    <Card className="h-full flex flex-col hover:border-primary/50 transition-colors duration-300 bg-card/50 backdrop-blur-sm">
+    <Card className="link-card link-card--interactive">
       <CardHeader>
-        <div className="flex justify-between items-start gap-2">
-          <CardTitle className="text-xl font-mono text-ocean-foam">{link.title}</CardTitle>
-          <Badge variant="outline" className="shrink-0 text-primary border-primary/30">
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '8px' }}>
+          <CardTitle>{link.title}</CardTitle>
+          <Badge variant="outline" className="link-card__platform-badge">
             {link.platform}
           </Badge>
         </div>
-        <CardDescription className="line-clamp-2 text-ocean-mist">
+        <CardDescription>
           {link.description}
         </CardDescription>
       </CardHeader>
-      <CardContent className="flex-grow">
-        <div className="flex flex-wrap gap-2">
+      <CardContent style={{ flex: 1 }}>
+        <div className="link-card__genres">
           {link.genres.map((genre) => (
-            <Badge key={genre} variant="secondary" className="bg-ocean-deep text-ocean-mist hover:bg-ocean-light">
+            <Badge key={genre} variant="secondary">
               {genre}
             </Badge>
           ))}
@@ -36,9 +36,9 @@ export function LinkCard({ link }: LinkCardProps) {
           href={link.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-sm text-primary hover:text-primary/80 flex items-center gap-1 font-mono"
+          className="link-card__link"
         >
-          LISTEN NOW <ExternalLink className="h-3 w-3" />
+          LISTEN NOW <ExternalLink style={{ height: '12px', width: '12px' }} />
         </Link>
       </CardFooter>
     </Card>

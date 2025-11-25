@@ -1,0 +1,111 @@
+@use 'variables' as *;
+
+// ============================================
+// Mixins
+// ============================================
+
+// Responsive breakpoints
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == 'sm' {
+    @media (min-width: $breakpoint-sm) { @content; }
+  } @else if $breakpoint == 'md' {
+    @media (min-width: $breakpoint-md) { @content; }
+  } @else if $breakpoint == 'lg' {
+    @media (min-width: $breakpoint-lg) { @content; }
+  } @else if $breakpoint == 'xl' {
+    @media (min-width: $breakpoint-xl) { @content; }
+  } @else if $breakpoint == '2xl' {
+    @media (min-width: $breakpoint-2xl) { @content; }
+  }
+}
+
+// Nier-style box (geometric border)
+@mixin nier-box($border-color: $color-border) {
+  border: $border-width-medium solid $border-color;
+  background-color: $color-surface;
+  position: relative;
+  
+  // Corner accents (optional, for extra Nier feel)
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    border: $border-width-medium solid $border-color;
+  }
+  
+  &::before {
+    top: -$border-width-medium;
+    left: -$border-width-medium;
+    border-right: none;
+    border-bottom: none;
+  }
+  
+  &::after {
+    bottom: -$border-width-medium;
+    right: -$border-width-medium;
+    border-left: none;
+    border-top: none;
+  }
+}
+
+// Text truncation
+@mixin truncate($lines: 1) {
+  @if $lines == 1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  } @else {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+// Focus state (Nier-style outline)
+@mixin focus-outline {
+  outline: $border-width-medium solid $color-primary;
+  outline-offset: 2px;
+}
+
+// Hover lift effect
+@mixin hover-lift {
+  transition: transform $transition-fast, box-shadow $transition-fast;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
+  }
+}
+
+// Button reset
+@mixin button-reset {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  
+  &:focus {
+    outline: none;
+  }
+}
+
+// Container
+@mixin container {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: $space-4;
+  padding-right: $space-4;
+  
+  @include respond-to('md') {
+    padding-left: $space-6;
+    padding-right: $space-6;
+  }
+}

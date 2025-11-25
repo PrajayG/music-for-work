@@ -1,0 +1,54 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+// ============================================
+// Badge Component (BEM)
+// ============================================
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  
+  padding: $space-1 $space-3;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  font-family: $font-family-mono;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  
+  border: $border-width-thin solid $color-primary;
+  background-color: rgba($color-primary, 0.1);
+  color: $color-primary;
+  
+  transition: all $transition-fast;
+  
+  // Variants
+  &--secondary {
+    border-color: $color-sky-400;
+    background-color: rgba($color-sky-400, 0.1);
+    color: $color-sky-600;
+  }
+  
+  &--outline {
+    background-color: transparent;
+    border-color: $color-border;
+    color: $color-text-secondary;
+  }
+  
+  &--destructive {
+    border-color: $color-error;
+    background-color: rgba($color-error, 0.1);
+    color: $color-error;
+  }
+  
+  // Interactive
+  &--clickable {
+    cursor: pointer;
+    
+    &:hover {
+      background-color: rgba($color-primary, 0.2);
+      border-color: $color-primary-hover;
+    }
+  }
+}

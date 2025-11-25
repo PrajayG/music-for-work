@@ -1,0 +1,108 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+// ============================================
+// Button Component (BEM)
+// ============================================
+
+.button {
+  @include button-reset;
+  
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-2;
+  
+  font-family: $font-family-mono;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  
+  padding: $space-3 $space-6;
+  border: $border-width-medium solid $color-primary;
+  background-color: $color-primary;
+  color: $color-surface;
+  
+  transition: all $transition-fast;
+  cursor: pointer;
+  
+  &:hover {
+    background-color: $color-primary-hover;
+    border-color: $color-primary-hover;
+    transform: translateY(-1px);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+  
+  &:focus-visible {
+    @include focus-outline;
+  }
+  
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  
+  // Variants
+  &--outline {
+    background-color: transparent;
+    color: $color-primary;
+    
+    &:hover {
+      background-color: rgba($color-primary, 0.1);
+    }
+  }
+  
+  &--ghost {
+    background-color: transparent;
+    border-color: transparent;
+    color: $color-text-primary;
+    
+    &:hover {
+      background-color: rgba($color-sky-500, 0.08);
+      border-color: $color-border;
+    }
+  }
+  
+  &--secondary {
+    background-color: $color-sky-300;
+    border-color: $color-sky-300;
+    color: $color-text-primary;
+    
+    &:hover {
+      background-color: $color-sky-400;
+      border-color: $color-sky-400;
+    }
+  }
+  
+  &--destructive {
+    background-color: $color-error;
+    border-color: $color-error;
+    
+    &:hover {
+      background-color: darken($color-error, 10%);
+      border-color: darken($color-error, 10%);
+    }
+  }
+  
+  // Sizes
+  &--sm {
+    padding: $space-2 $space-4;
+    font-size: $font-size-xs;
+  }
+  
+  &--lg {
+    padding: $space-4 $space-8;
+    font-size: $font-size-base;
+  }
+  
+  &--icon {
+    padding: $space-3;
+    width: 40px;
+    height: 40px;
+  }
+}

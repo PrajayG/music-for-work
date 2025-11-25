@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Space_Mono } from "next/font/google";
-import "./globals.css";
+import "../styles/globals.scss";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${spaceMono.variable} antialiased bg-ocean-deep text-ocean-foam`}
+        className={`${inter.variable} ${spaceMono.variable}`}
       >
         {children}
       </body>
